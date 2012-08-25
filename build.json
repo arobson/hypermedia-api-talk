@@ -1,0 +1,24 @@
+{
+	"source": "src",
+	"output": "presentation",
+	"anvil.http": {
+		"paths": {
+			"/reveal": "./reveal",
+			"/ace": "./ace",
+			"/": "./presentation"
+		}
+	},
+	"combiner": {
+		"patterns": [
+			{
+				"extensions": [ ".jade" ],
+				"find": "/import.?'.*'.?/g",
+				"replace": "/([ \t]*)import.?'replace'.?/g"
+			}
+		]
+	},
+	"dependencies": [
+		"anvil.http",
+		"anvil.jade"
+	]
+}

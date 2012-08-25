@@ -1,0 +1,132 @@
+				section
+					p Building Our Bowling API
+					section
+						h1 Scenario
+						ol
+							li Start game
+							li Quit game
+							li Check game score
+							li Throw the ball
+					section
+						h1 Base format - JSON
+						h3 Pros
+						ol
+							li Broad support
+							li Easy to read
+							li Lighter than XML
+
+						div
+							br
+							h3 Con
+							p No native Hypermedia Factors
+					section
+						h1 Possible States
+						ol
+							li Game started
+							li Game ended
+							li Ball thrown
+							li Game score
+					section
+						h1 State Transitions
+						ol
+							li Game started -> Ball thrown
+							li Ball thrown -> Game score
+							li Ball thrown -> Game ended
+							li Game ended -> Game started
+					section
+						h1 Domain Style - Specific
+						h3 Why?
+						ol
+							li Well known, static data structure
+							li Easier for clients to process
+							li Easier to read
+					section
+						h1 Document Structure
+						h3 mimetype: bowling+json
+						pre: code(style="width:100%; height: 375px").
+							{
+								"game": {
+									"id": 0,
+									"frames": [ "throws": [] ],
+									"pins": {
+										"hit": 0,
+										"remaining": 0,
+										"down": 0
+									}
+									"score": 0,
+									"error": ""
+								}
+							}
+					section
+						h3 OPTIONS Response
+						pre: code(style="width:100%; height: 350px").
+							{
+								"links": [
+									{ "rel": "start", "href": "bowling/game", "method": "POST" }
+									{ "rel": "throw", "href": "bowling/game/{id}", "method": "PUT" }
+									{ "rel": "score", "href": "bowling/game/{id}", "method": "GET" }
+									{ "rel": "stop", "href": "bowling/game/{id}", "method": "DELETE" }
+								]
+							}
+					section
+						h3 Start Response
+						pre: code(style="width:100%; height: 350px").
+							{
+								"game": { 
+									"id": 0,
+									"frames": []
+								}
+								"links": [
+									{ "rel": "throw", "href": "bowling/game/0", "method": "PUT" }
+									{ "rel": "score", "href": "bowling/game/0", "method": "GET" }
+									{ "rel": "stop", "href": "bowling/game/0", "method": "DELETE" }
+								]
+							}
+					section
+						h3 Stop Response
+						pre: code(style="width:100%; height: 350px").
+							{
+								"game": { 
+									"id": 0,
+									"frames": [],
+									"score": 0
+								}
+							}
+					section
+						h3 Throw Response
+						pre: code(style="width:100%; height: 425px").
+							{
+								"game": { 
+									"id": 0,
+									"pins": {
+										"hit": 0,
+										"remaining": 0,
+										"down": 0
+									}
+								}
+								"links": [
+									{ "rel": "throw", "href": "bowling/game/0", "method": "PUT" }
+									{ "rel": "score", "href": "bowling/game/0", "method": "GET" }
+									{ "rel": "stop", "href": "bowling/game/0", "method": "DELETE" }
+								]
+							}
+					section
+						h3 Score Response
+						pre: code(style="width:100%; height: 475px").
+							{
+								"game": { 
+									"id": 0,
+									"frames": [ "throws": [] ],
+									"pins": {
+										"hit": 0,
+										"remaining": 0,
+										"down": 0
+									},
+									"score": 0
+								}
+								"links": [
+									{ "rel": "throw", "href": "bowling/game/0", "method": "PUT" }
+									{ "rel": "score", "href": "bowling/game/0", "method": "GET" }
+									{ "rel": "stop", "href": "bowling/game/0", "method": "DELETE" }
+								]
+							}

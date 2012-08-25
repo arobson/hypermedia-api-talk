@@ -1,0 +1,45 @@
+				section
+					p Server-side Implementation
+					section
+						h2 Hypermedia Links
+						h3 Options
+						ul
+							li.fragment Hand code the static links in each response
+							li.fragment Build links from templates and attach to responses
+							li.fragment Generate links from metadata
+					section
+						h2 Generating links from metadata
+						h3 Good News
+						p We can make this up because there's no standard
+						h3 Bad News
+						p We have to make this up because there's no standard
+					section
+						h2 We've Already Defined The Contents
+						h3 List states and transitions
+						pre: code(style="width:100%; height: 450px").
+							{
+								"game": {
+									"instance": {
+										"url": "game/{id}",
+										"actions": {
+											"throw": { "method": "PUT", "properties": [ ... ] },
+											"stop": { "method": "DELETE", "properties": [ ... ] },
+											"score": { "method": "GET", "properties": [ ... ] }
+										}
+									},
+									"create": {
+										"url": "game",
+										"actions": {
+											"start": { "method": "POST", "properties": [ ... ] }
+										}
+									}
+								}
+							}
+					section
+						h2 Now What?
+						h3 Building Responses From Metadata
+						ol
+							li Generate a response to OPTIONS inquiries
+							li Generate responses to each listed verb
+							li Generate state representation for each verb
+							li Generate links for each response
