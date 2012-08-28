@@ -31,18 +31,18 @@
 						ol
 							li Game started -> Ball thrown
 							li Ball thrown -> Game score
+							li Ball thrown -> Throw the ball again
 							li Ball thrown -> Game ended
 							li Game ended -> Game started
 					section
 						h1 Domain Style - Specific
-						h3 Why?
+						h2 Why?
 						ol
 							li Well known, static data structure
 							li Easier for clients to process
 							li Easier to read
 					section
 						h1 Document Structure
-						h3 mimetype: bowling+json
 						pre: code(style="width:100%; height: 375px").
 							{
 								"game": {
@@ -63,9 +63,6 @@
 							{
 								"links": [
 									{ "rel": "start", "href": "bowling/game", "method": "POST" }
-									{ "rel": "throw", "href": "bowling/game/{id}", "method": "PUT" }
-									{ "rel": "score", "href": "bowling/game/{id}", "method": "GET" }
-									{ "rel": "stop", "href": "bowling/game/{id}", "method": "DELETE" }
 								]
 							}
 					section

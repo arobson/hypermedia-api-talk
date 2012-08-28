@@ -1,25 +1,59 @@
 				section
+					section 
+						h1 Oh Look, An Elephant
+						h2.fragment This Is Not About REST
+						h3.fragment REST is a style of Hypermedia API
+						h3.fragment So many of the same benefits exist
+						div.fragment
+							h4 But so help me, if a well-meaning RESTifarian
+							h4 interrupts to inform me I'm wrong about
+							h4 REST ...
 					section
-						h1 Disclaimer
+						h1 No Trails Will Be Blazed
 						h2.fragment If You've Read This Book
 							br
 							img(src="/images/hypermedia_book.jpg")
 						br
-						h3.fragment Then now is a good time for a nap
-						p.fragment (that hawk is pretty rad)
+						h3.fragment A Mid-Talk Nap Is In Your Future
+					section
+						h1 Goals
+						ul
+							li Understand what a Hypermedia API is
+							li Learn about the benefits it provides
+							li Break it down into components
+							li Design one from scratch
+					section
+						h1 HTTP APIs
+						h3.normal Common characteristics
+						ul
+							li Stateless
+							li Identifiable resources
+							li State transition via representations
+							li Uses self-describing messages
+					section
+						h1 HTTP APIs
+						div.normal.fragment
+							h3 Problem
+							p Clients are tightly coupled to server implementation
+							p such that the server cannot evolve independently
+						br
+						br
+						div.normal.fragment
+							h3 Solution
+							p Provide metadata that defines the available states and
+							p transitions that relate to each representation of state
+					section
+						h1 HATEOAS
+						h3 Hypertext As The Engine Of Application State
+						p The server provides a uniform interface to the clients
+						p through hypermedia such that the coupling between
+						p client and server is removed
 					section
 						h1 What is Hypermedia?
-						h2 For the purpose of this talk it is:
-						h3: ul
-							li content which represents application state
-							li operation-context driven metadata
-							li descriptions of available interactions
-							li used to control application flow 
-
-						
+						div.fragment
+							h2 Application control metadata 
+							h2 combined with the representation
+								
 					section
 						h1 in other words:
-						h2 hypermedia is more about how than what
-					section
-						h2 Gee, That's swell and all, but
-						img(src='/images/someta.jpeg',style="height: 350px")
+						h3 hypermedia defines the available transitions between state
