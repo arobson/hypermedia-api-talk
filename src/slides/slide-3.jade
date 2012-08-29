@@ -1,10 +1,4 @@
 				section
-					section 
-						h1 The REST Elephant
-						h2.fragment This Is Not About REST
-						h3.fragment REST is a style of Hypermedia API
-						h3.fragment So many of the same benefits exist
-						h4.fragment But this talk is not about REST
 					section
 						h1 Acknowledgements
 						h2.fragment This Book
@@ -12,15 +6,22 @@
 							img(src="/images/hypermedia_book.jpg")
 						br
 						h3.fragment Is my primary source
+					section 
+						h1 This Term REST
+						img(src="/images/inigo.jpeg")
+						h2.fragment This Is Not About REST
+						h3.fragment REST is a style of Hypermedia API
+						h3.fragment So many of the same benefits exist
+						h4.fragment But this talk is not about REST
 					section
 						h1 Goals
 						ul
-							li Understand what a Hypermedia API is
+							li The what why and how of hypermedia
 							li Learn about the benefits it provides
 							li Break it down into components
 							li Design one from scratch
 					section
-						h1 Common Terms
+						h1 Buzzword Bingo
 						ul
 							li
 								h3 Resource
@@ -28,7 +29,9 @@
 								h3 Representation
 								span - the way properties of an entity are presented
 								h3 Action / Transition
-								span -
+								span - A request which advances the application flow
+								h3 Verb / Method
+								span - The HTTP verb used for a request
 					section
 						h1 HTTP Based APIs
 						h3.normal Common characteristics
@@ -50,13 +53,32 @@
 							p Provide metadata that defines the available states and
 							p transitions that relate to each representation of state
 					section
-						h1 HATEOAS
-						h3 Hypertext As The Engine Of Application State
-						p The server provides a uniform interface to the clients
-						p through hypermedia such that the coupling between
-						p client and server is removed
+						h1 Why Hypermedia?
+						h2 Hypermedia Is Simple
+						h3 Subtly builds on HTTP's fundamentals 
+					section
+						p What About Other HTTP APIs?
+						h1 SOAP
+						img(src='/images/soap.jpg', width="400px")
+						h3.fragment How can something clean be so dirty?
+					section
+						p What About Other HTTP APIs?
+						h1 WS-*
+						img(src='/images/deathstar.jpeg', width="350px")
+						h3.fragment Your Bandwidth cannot repel a payload of this magnitude
+					section
+						p What About Other HTTP APIs?
+						h1 REST
+						img(src='/images/unicorn.jpeg', width="400px")
+						h3.fragment No one's ever seen one in the wild
 					section
 						h1 So What is Hypermedia?
 						div.fragment
 							h2 Application flow metadata 
 							h2 combined with the representation of state
+					section
+						h1 HATEOAS
+						h3 Hypertext As The Engine Of Application State
+						p The server provides a uniform interface to the clients
+						p through hypermedia such that the coupling between
+						p client and server is removed
