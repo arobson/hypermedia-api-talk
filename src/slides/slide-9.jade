@@ -1,76 +1,17 @@
 				section
 					section
-						h1 Please Enjoy Some Proof
-						img(src='images/pudding.jpeg')
-
+						h1 To The Demo!
 					section
-						h1 Scenario
-						ul
-							li We have a list of talk titles with their speakers
-							li We have a simple form for adding new talks
-							li The form's submit button should be disabled if:
+						h1 What The Demo Does Well
+						h3
 							ul
-								li The title entered already existed
-								li The title or speaker is empty
-
+								li.fragment Shows how to drive dynamic hypermedia generation
+								li.fragment Demonstrates how to control application flow
+								li.fragment Highlights the potential of hypermedia
 					section
-						h3 Adding a speaker
-						pre: code(style="width:100%; height: 550px").
-							$( "#form #add" ).on( "click", function() {
-								var 
-									$title = $( "#form #title" ),
-									$speaker = $( "#form #speaker" ),
-									title = $title.val().trim(),
-									speaker = $speaker.val().trim(),
-									$list = $( "#list" ),
-									$dt = $( "&lt;dt&gt;" + title + "&lt;/dt&gt;" ),
-									$dd = $( "&lt;dd&gt;" + speaker + "&lt;/dd&gt;" );
-								
-								$list.append( $dt );
-								$list.append( $dd );
-								$title.val("");
-								$speaker.val("");
-							} );
-					section
-						h3 Enable / Disable Add
-						pre: code(style="width:100%; height: 550px").
-							$( "#form" ).on( "keyup", function() {
-								var $form = $( "#form" ),
-									$list = $( "#list" ),
-									$add = $form.find( "#add" ),
-									newTitle = $form.find( "#title" ).val().trim(),
-									newSpeaker = $form.find( "#speaker" ).val().trim(),
-									blankTitle = newTitle === "" || !newTitle,
-									blankSpeaker = newSpeaker === "" || !newSpeaker,
-									titles = $list.find( "dt" )
-												.map( function() { return $(this).text(); } )
-												.get();
-									duplicate = _.any( titles, function( title ) { 
-										return title === newTitle;
-									} );
-								if( duplicate || blankTitle || blankSpeaker) {
-									$add.attr( "disabled", "disabled" );
-								} else {
-									$add.removeAttr( "disabled" );
-								}
-							} );
-					section
-						h2 Demo
-						iframe(style="width: 900px; height: 500px",src="http://jsfiddle.net/a_robson/NfVT2/7/embedded/result",allowfullscreen="allowfullscreen",frameborder="0")
-					section
-						div
-							h3 The Good
+						h1 Where The Demo Fails
+						h3
 							ul
-								li Short code listing ~ 33 LoC
-						br
-						div.fragment
-							h2 The Bad
-							ul
-								li Tightly coupled to the DOM
-								li Tightly coupled to jQuery
-						br
-						div.fragment
-							h1 The Ugly
-							ul
-								li Hard to understand the behavior
-								li Writing and maintaining tests
+								li.fragment Complex domains with nested resources
+								li.fragment No provision for versioning or security
+								li.fragment Demonstrate more efficient patterns

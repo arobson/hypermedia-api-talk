@@ -1,5 +1,67 @@
 				section
 					p Client-side Implementation
 					section
-					h2 
-					
+						h2 General Approach
+						ol
+							li 
+								p Process hypermedia from OPTIONS response
+							li
+								p Build a list of actions from hypermedia
+							li 
+								p Present control flow based on available actions
+							li
+								p Process hypermedia from responses to actions
+
+							br
+							br
+						h3 Warning:
+						p This example conflates tracking representation and available actions
+					section
+						h2 Game Model
+						pre: code(style="width:100%; height: 500px").
+							var game = {
+								data: {},
+								api: {},
+								links: {},
+
+								buildCall: function( link ) {
+									var self = this;
+									return function( success, failure ) {
+										$.ajax( {
+											url: link.href,
+											type: link.method.toUpperCase(),
+											dataType: "json",
+											success: function( data ) {
+												self.parseLinks( data, link.rel === "options" ? "api" : "links" );
+												self.mapData( data );
+												if( success ) {
+													success( data );
+												}
+											},
+											failure: failure
+										} );
+									};
+								},
+								init: function( done ) {
+									this.api.options = this.buildCall( { rel: "options", method: "OPTIONS", href: "/game/" } );
+									this.api.options( done );
+								},
+								mapData: function( data ) {
+									var self = this,
+										current = data.game;
+									if( current ) {
+										_.each( current, function( value, key ) {
+											self.data[ key ] = current[ key ];
+										} );
+									}
+								},
+								parseLinks: function( data, target ) {
+									var self = this;
+									self[ target ] = {};
+									if( data.links ) {
+										_.each( data.links, function( link ) {
+											self[ target ][ link.rel ] = self.buildCall( link );
+										} );
+									}
+								}
+							};

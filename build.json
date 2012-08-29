@@ -5,7 +5,8 @@
 		"paths": {
 			"/reveal": "./reveal",
 			"/ace": "./ace",
-			"/": "./presentation"
+			"/": "./presentation",
+			"/codemirror": "./codemirror"
 		}
 	},
 	"combiner": {

@@ -1,22 +1,33 @@
 				section
 					p Server-side Implementation
 					section
-						h2 Hypermedia Links
+						h2 Hypermedia Generation
 						h3 Options
 						ul
-							li.fragment Hand code the static links in each response
-							li.fragment Build links from templates and attach to responses
-							li.fragment Generate links from metadata
+							li.fragment Hand code the hypermedia
+							li.fragment Build hypermedia from templates
+							li.fragment Generate hypermedia from metadata format
 					section
-						h2 Generating links from metadata
+						h2 Generating Hypermedia
 						h3 Good News
-						p We can make this up because there's no standard
+						p We have flexibility and freedom
 						h3 Bad News
 						p We have to make this up because there's no standard
 					section
-						h2 We've Already Defined The Contents
-						h3 List states and transitions
-						pre: code(style="width:100%; height: 450px").
+						h2 General Approach
+						ol
+							li 
+								p Describe resources, representations, actions 
+								p and links via metadata
+							li
+								p Provide adapter to translate routes to
+								p actions against specific resources
+							li 
+								p Generate routes, links and representations 
+								p from metadata for each resource and action
+					section
+						h2 Resources, representations, actions and links
+						pre: code(style="width:100%; height: 425px").
 							"game": {
 								"throw": {
 									"method": "put",
@@ -47,7 +58,6 @@
 									"properties": [
 										"id",
 										"frames",
-										"pins",
 										"score"
 									],
 									"transitions": [
@@ -57,8 +67,7 @@
 								"start": { 
 									"method": "post", 
 									"properties": [
-										"id",
-										"frames"
+										"id"
 									],
 									"transitions": [
 										"stop", "score", "throw"
@@ -66,10 +75,96 @@
 								}
 							}
 					section
-						h2 Now What?
-						h3 Building Responses From Metadata
-						ol
-							li Generate a response to OPTIONS inquiries
-							li Generate responses to each listed verb
-							li Generate state representation for each verb
-							li Generate links for each response
+						h2 Game Adapter
+						pre: code(style="width:100%; height: 500px").
+							var gameManager = {
+								games: {},
+								ids: _.range( 1024 ),
+								score: function( id ) {
+									var g = this.games[ id ];
+									if( g ) {
+										g.calculateScore();
+										return g;
+									} else {
+										throw new Error( "invalid game id: " + id );
+									}
+								},
+								start: function() {
+									var id = this.ids.shift(),
+										g = game( id );
+									this.games[ id ] = g;
+									return g;
+								},
+								stop: function( id ) {
+									var g = this.games[ id ];
+									if( g ) {
+										delete this.games[ id ];
+										return g;
+									} else {
+										throw new Error( "invalid game id: " + id );
+									}
+								},
+								"throw": function( id ) {
+									var g = this.games[ id ];
+									if( g ) {
+										var hit = g[ "throw" ]();
+										return g;
+									} else {
+										throw new Error( "invalid game id: " + id );
+									}
+								}
+							};
+					section
+						h2 Routes
+						pre: code(style="width:100%; height: 500px").
+							var mapRoutes = function( app, metadata ) {
+								var linkMap = mapMetadata( metadata );
+								_.each( metadata, function( entity, entityName ) {
+									_.each( entity, function( action, actionName ) {
+										var url = "/" + entityName + 
+												( action.instance ? "/:id" : "/" ),
+											list = linkMap[ entityName ].links;
+
+										app[ action.method ]( url, function( req, resp ) {
+											var call = gameManager[ actionName ],
+												state = req.params.id != undefined ? call( req.params.id ) : call(),
+												stateMap = _.pick( state, action.properties ),
+												links = filterLinks( list, entity, action, state );
+
+											resp.send( {
+												game: stateMap,
+												links: fillTemplates( links, stateMap )
+											} );
+										} );
+									} );
+									app.options( "/" + entityName, function( req, resp ) {
+										var links = _.filter( linkMap[ entityName ], function( link ) {
+											
+											} )
+										resp.send( linkMap[ entityName ] );
+									} );
+								} );
+							};
+					section
+						h2 Link Generation from Metadata
+						pre: code(style="width:100%; height: 500px").
+							var mapMetadata = function( metadata ) {
+								var entities = {};
+								_.each( metadata, function( entity, entityName ) {
+									var entityOptions = entityName + "-option";
+									entities[ entityName ] = { links: {} };
+									entities[ entityOptions ] = { links: {} };
+									_.each( entity, function( action, actionName ) {
+										var link = {
+											rel: actionName,
+											href: "/" + entityName + ( action.instance ? "/{id}" : "/" ),
+											method: action.method
+										};
+										entities[ entityName ].links[ actionName ] = link;
+										if( !action.instance ) {
+											entities[ entityOptions ].links[ actionName ] = link;
+										}
+									} );
+								} );
+								return entities;
+							};
