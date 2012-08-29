@@ -5,14 +5,15 @@
 						h3 (Just the basics)
 						div
 							ul
-								li Embedded Link (LE) - partial updates
-								li Outbound Link (LO) - new content
-								li Templated Link (LT) - links constructed from data
+								li Embedded Link (LE) - ex: img tag
+								li Outbound Link (LO) - ex: a tag
+								li Templated Link (LT) - ex: uri construction
 						br
 						div
 							p There are 6 others:
 							p Idempotent Links, Non-Idempotent Links, 
-							p Read Controls, Update Controls, CM, CL
+							p Read Controls, Update Controls, 
+							p Method Controls, Link Annotation Controls
 					section
 						p Hypermedia Basics
 						h2 Formats
@@ -37,6 +38,21 @@
 							li HTML puts render responsibility on the server
 							li HTML only supports GET, HEAD and POST HTTP methods
 							li HTML is probably far too limiting for most APIs
+					section
+						p Hypermedia Basics
+						h2 State Transfer
+						h3 (client to server)
+						dl
+							dt None
+							dd Only used in read-only applications
+							dt Predefined
+							dd 
+								p Externally defined rules for validation
+								p typically enforced in client code
+							dt Ad-Hoc
+							dd 
+								p Defined within hypermedia controls
+								p problematic for automated clients
 					section
 						p Hypermedia Basics
 						h2 Domain Styles

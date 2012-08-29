@@ -2,10 +2,7 @@
 					p Building Our Bowling API
 					section
 						h1 Disclaimer
-						h3 This demo is contrived and in some cases
-						h3 inefficient. It's intended to demonstrate
-						h3 common interactions vs. be the most
-						h3 realistic, efficient implementation.
+						h3 This example is contrived and inefficient.
 					section
 						h1 Scenario
 						ol
@@ -51,12 +48,9 @@
 						pre: code(style="width:100%; height: 375px").
 							{
 								"game": {
-									"id": 0,
+									"id": 1,
 									"frames": [ "throws": [] ],
-									"pins": {
-										"hit": 0,
-										"remaining": 0
-									}
+									"pins": 0,
 									"score": 0,
 									"error": ""
 								}
@@ -74,12 +68,12 @@
 						pre: code(style="width:100%; height: 350px").
 							{
 								"game": { 
-									"id": 0
+									"id": 1
 								}
 								"links": [
-									{ "rel": "throw", "href": "bowling/game/0", "method": "PUT" }
-									{ "rel": "score", "href": "bowling/game/0", "method": "GET" }
-									{ "rel": "stop", "href": "bowling/game/0", "method": "DELETE" }
+									{ "rel": "throw", "href": "bowling/game/1", "method": "PUT" }
+									{ "rel": "score", "href": "bowling/game/1", "method": "GET" }
+									{ "rel": "stop", "href": "bowling/game/1", "method": "DELETE" }
 								]
 							}
 					section
@@ -87,7 +81,7 @@
 						pre: code(style="width:100%; height: 350px").
 							{
 								"game": { 
-									"id": 0,
+									"id": 1,
 									"frames": [],
 									"score": 0
 								}
@@ -97,16 +91,13 @@
 						pre: code(style="width:100%; height: 425px").
 							{
 								"game": { 
-									"id": 0,
-									"pins": {
-										"hit": 0,
-										"remaining": 0
-									}
+									"id": 1,
+									"pins": 0
 								}
 								"links": [
-									{ "rel": "throw", "href": "bowling/game/0", "method": "PUT" }
-									{ "rel": "score", "href": "bowling/game/0", "method": "GET" }
-									{ "rel": "stop", "href": "bowling/game/0", "method": "DELETE" }
+									{ "rel": "throw", "href": "bowling/game/1", "method": "PUT" }
+									{ "rel": "score", "href": "bowling/game/1", "method": "GET" }
+									{ "rel": "stop", "href": "bowling/game/1", "method": "DELETE" }
 								]
 							}
 					section
@@ -114,13 +105,13 @@
 						pre: code(style="width:100%; height: 475px").
 							{
 								"game": { 
-									"id": 0,
+									"id": 1,
 									"frames": [ "throws": [] ],
 									"score": 0
 								}
 								"links": [
-									{ "rel": "throw", "href": "bowling/game/0", "method": "PUT" }
-									{ "rel": "score", "href": "bowling/game/0", "method": "GET" }
-									{ "rel": "stop", "href": "bowling/game/0", "method": "DELETE" }
+									{ "rel": "throw", "href": "bowling/game/1", "method": "PUT" }
+									{ "rel": "score", "href": "bowling/game/1", "method": "GET" }
+									{ "rel": "stop", "href": "bowling/game/1", "method": "DELETE" }
 								]
 							}
